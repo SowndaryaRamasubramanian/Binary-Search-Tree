@@ -21,7 +21,7 @@ def isValidateBst(node):
     minValue=float("-inf")
     maxValue=float("inf")
     return checkwhetherValidBst(node,minValue,maxValue)
-
+---------------recursion--------------------------
 def checkwhetherValidBst(node, minValue, maxValue):
     if node is None:
         return True
@@ -33,3 +33,17 @@ def checkwhetherValidBst(node, minValue, maxValue):
 
 print(isValidateBst(root))
 
+--------------Iteration----------------------------
+def checkwhetherValidBstIteratively(node):
+    stack=[]
+    prev=None
+    while len(stack)>0 or node is not None:
+        if node is not None:
+            stack.append(node)
+            node=node.left
+        node=stack.pop()
+        if prev is not None and prev.value>node.value:
+            return False
+        prev=node
+        node=node.right
+    return True
