@@ -1,0 +1,35 @@
+class binaryTree:
+    def __init__(self,value):
+        self.value=value
+        self.left=None
+        self.right=None
+
+root=binaryTree(10)
+root.left=binaryTree(5)
+root.right=binaryTree(15)
+
+root.left.left=binaryTree(2)
+root.left.right=binaryTree(6)
+
+root.right.left=binaryTree(13)
+root.right.right=binaryTree(22)
+
+root.left.left.left=binaryTree(1)
+root.right.left.right=binaryTree(14)
+
+def isValidateBst(node):
+    minValue=float("-inf")
+    maxValue=float("inf")
+    return checkwhetherValidBst(node,minValue,maxValue)
+
+def checkwhetherValidBst(node, minValue, maxValue):
+    if node is None:
+        return True
+    if node.value <= minValue or node.value > maxValue:
+        return False
+    isLeftValid = checkwhetherValidBst(node.left, minValue, node.value)
+    isRightValid = checkwhetherValidBst(node.right, node.value, maxValue)
+    return isLeftValid and isRightValid
+
+print(isValidateBst(root))
+
